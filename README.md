@@ -105,11 +105,11 @@ Since the MECHREVO 14X is based on the Tong Fang GX4HRXL board, similar to the T
 This should work for any .deb-based distro with any kernel (it will probably also work on Fedora/Arch, etc.; you just need to deal with dependencies).
 1. Install the dependencies (for .deb based distros):
 ```bash
-apt update && apt install -y git make gcc14 dkms linux-headers-$(uname -r)
+apt update && apt install -y curl git make gcc dkms devscripts debhelper dh-dkms linux-headers-$(uname -r)
 ```
 2. Download `tuxedo-drivers`:
 ```bash
-git clone https://gitlab.com/tuxedocomputers/development/packages/tuxedo-drivers.git
+git clone https://gitlab.com/tuxedocomputers/development/packages/tuxedo-drivers.git && cd tuxedo-drivers/
 ```
 3. Apply patch to add MECHREVO as a vendor:
 ```bash
@@ -117,7 +117,7 @@ curl -L https://github.com/sund3RRR/Mechrevo14X-linux/raw/master/patches/add_mec
 ```
 4. Install drivers:
 ```bash
-make dkmsinstall
+make package-deb && dpkg -i ../tuxedo-drivers_*.deb
 ```
 5. Reboot your system
 ### TUXEDO Control Center
